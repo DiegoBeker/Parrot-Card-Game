@@ -1,0 +1,1 @@
+prompt('numero de cartas');
