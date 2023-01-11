@@ -13,9 +13,12 @@ console.log(baralho);
 inserirDeckHtml();
 
 function numeroCartas() {
-    while (qtdCartas % 2 != 0 || qtdCartas < 4 || qtdCartas > 14) {
+    if(qtdCartas % 2 !== 0 || qtdCartas < 4 || qtdCartas > 14)
+        alert('numero invalido');
+    while (qtdCartas % 2 !== 0 || qtdCartas < 4 || qtdCartas > 14) {
         qtdCartas = prompt('cartas');
-        alert(qtdCartas);
+        if(qtdCartas % 2 !== 0 || qtdCartas < 4 || qtdCartas > 14)
+        alert('numero invalido');
     }
 }
 function montarDeck() {
