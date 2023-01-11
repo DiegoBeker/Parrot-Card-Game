@@ -26,6 +26,7 @@ h1 {
 .deck{
     width: 1110px;
     display: flex;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
@@ -60,10 +61,10 @@ h1 {
     transform: rotateY(180deg);
   }
 
-  .card:hover .back-face {
+  .card .back-face.open {
     transform: rotateY(0deg);
   }
 
-  .card:hover .front-face {
+  .card .front-face.open {
     transform: rotateY(-180deg);
   }

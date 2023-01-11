@@ -1,46 +1,50 @@
-const lista = document.querySelector('.deck');
+const list = document.querySelector('.deck');
 let gifs = ['bobrossparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 'revertitparrot', 'tripletsparrot', 'unicornparrot'];
-let qtdCartas = prompt('cartas');
-let baralho = [];
+let cards = prompt('Numero de cartas par Min = 4 Max = 14');
+let deck = [];
 
-numeroCartas();
-alert(qtdCartas);
-console.log(gifs);
-montarDeck();
-console.log(baralho);
-baralho.sort(comparador);
-console.log(baralho);
-inserirDeckHtml();
+cardsNumbers();
+buildDeck();
+insertDeckOnHtml();
 
-function numeroCartas() {
-    if(qtdCartas % 2 !== 0 || qtdCartas < 4 || qtdCartas > 14)
-        alert('numero invalido');
-    while (qtdCartas % 2 !== 0 || qtdCartas < 4 || qtdCartas > 14) {
-        qtdCartas = prompt('cartas');
-        if(qtdCartas % 2 !== 0 || qtdCartas < 4 || qtdCartas > 14)
-        alert('numero invalido');
+function cardsNumbers() {
+    if(cards % 2 !== 0 || cards < 4 || cards > 14)
+        alert('Número inválido');
+    while (cards % 2 !== 0 || cards < 4 || cards > 14) {
+        cards = prompt('cartas');
+        if(cards % 2 !== 0 || cards < 4 || cards > 14)
+        alert('Número inválido');
     }
 }
-function montarDeck() {
-    for (let i = 0; i < qtdCartas / 2; i++) {
-        baralho.push(gifs[i]);
-        baralho.push(gifs[i]);
+function buildDeck() {
+    for (let i = 0; i < cards / 2; i++) {
+        deck.push(gifs[i]);
+        deck.push(gifs[i]);
     }
+    deck.sort(comparator);
+    deck.sort(comparator);
+    deck.sort(comparator);
+    deck.sort(comparator);
 }
 
-function inserirDeckHtml() {
-    for (let i = 0; i < baralho.length; i++) {
-        lista.innerHTML += `<div class="card">
+function insertDeckOnHtml() {
+    for (let i = 0; i < deck.length; i++) {
+        list.innerHTML += `<div class="card" onclick="select(this)">
                             <div class="front-face face">
                                 <img src="./images/back.png" alt="Parrot">
                             </div>
                             <div class="back-face face">
-                                <img src="./images/${baralho[i]}.gif" alt="${baralho[i]}">
+                                <img src="./images/${deck[i]}.gif" alt="${deck[i]}">
                             </div>
                         </div>`;
     }
 }
 
-function comparador() {
+function comparator() {
     return Math.random() - 0.5;
+}
+
+function select(card){
+    card.querySelector('.front-face').classList.toggle('open');
+    card.querySelector('.back-face').classList.toggle('open');
 }
