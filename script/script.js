@@ -51,30 +51,29 @@ function select(card){
     card.querySelector('.back-face').classList.add('open');
     moves++;
     console.log(moves);
-    endGameCheck();
-    if(move.length===3){
+    if(move.length===2){
         const img0 = move[0].querySelector('.back-face img').getAttribute('src');
         const img1 = move[1].querySelector('.back-face img').getAttribute('src');
         if(img0==img1){
             console.log('iguais');
             move[0].classList.add('found');
             move[1].classList.add('found');
-            //endGameCheck();
+            
             move = [];
-            move.push(card);
         }else{
-            move[0].querySelector('.front-face').classList.remove('open');
-            move[0].querySelector('.back-face').classList.remove('open');
-            move[1].querySelector('.front-face').classList.remove('open');
-            move[1].querySelector('.back-face').classList.remove('open');
-            move = [];
-            move.push(card);
+            setTimeout(() => {
+                move[0].querySelector('.front-face').classList.remove('open');
+                move[0].querySelector('.back-face').classList.remove('open');
+                move[1].querySelector('.front-face').classList.remove('open');
+                move[1].querySelector('.back-face').classList.remove('open');
+                move = [];
+            },1000);   
         }
+        endGameCheck();
     } 
 }
 
 function endGameCheck(){
-    console.log('checando');
-    if(document.querySelectorAll('.open').length === cards*2)
-        alert(`Você ganhou em ${moves} jogadas!`);
+    if(document.querySelectorAll('.found').length === Number(cards))
+        alert(`Você ganhou em ${moves} jogadas!`),1000;
 }
