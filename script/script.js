@@ -2,16 +2,18 @@ const list = document.querySelector('.deck');
 let gifs = ['bobrossparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 'revertitparrot', 'tripletsparrot', 'unicornparrot'];
 let cards = prompt('Numero de cartas par Min = 4 Max = 14');
 let deck = [];
+let move = [];
+let moves = 0 ;
 
-cardsNumbers();
+cardsNumber();
 buildDeck();
 insertDeckOnHtml();
 
-function cardsNumbers() {
+function cardsNumber() {
     if(cards % 2 !== 0 || cards < 4 || cards > 14)
         alert('Número inválido');
     while (cards % 2 !== 0 || cards < 4 || cards > 14) {
-        cards = prompt('cartas');
+        cards = prompt('Numero de cartas par Min = 4 Max = 14');
         if(cards % 2 !== 0 || cards < 4 || cards > 14)
         alert('Número inválido');
     }
@@ -21,7 +23,6 @@ function buildDeck() {
         deck.push(gifs[i]);
         deck.push(gifs[i]);
     }
-    deck.sort(comparator);
     deck.sort(comparator);
     deck.sort(comparator);
     deck.sort(comparator);
@@ -45,6 +46,35 @@ function comparator() {
 }
 
 function select(card){
-    card.querySelector('.front-face').classList.toggle('open');
-    card.querySelector('.back-face').classList.toggle('open');
+    move.push(card);
+    card.querySelector('.front-face').classList.add('open');
+    card.querySelector('.back-face').classList.add('open');
+    moves++;
+    console.log(moves);
+    endGameCheck();
+    if(move.length===3){
+        const img0 = move[0].querySelector('.back-face img').getAttribute('src');
+        const img1 = move[1].querySelector('.back-face img').getAttribute('src');
+        if(img0==img1){
+            console.log('iguais');
+            move[0].classList.add('found');
+            move[1].classList.add('found');
+            //endGameCheck();
+            move = [];
+            move.push(card);
+        }else{
+            move[0].querySelector('.front-face').classList.remove('open');
+            move[0].querySelector('.back-face').classList.remove('open');
+            move[1].querySelector('.front-face').classList.remove('open');
+            move[1].querySelector('.back-face').classList.remove('open');
+            move = [];
+            move.push(card);
+        }
+    } 
+}
+
+function endGameCheck(){
+    console.log('checando');
+    if(document.querySelectorAll('.open').length === cards*2)
+        alert(`Você ganhou em ${moves} jogadas!`);
 }

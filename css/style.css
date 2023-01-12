@@ -21,6 +21,7 @@ h1 {
     letter-spacing: -0.004em;
     color: #75B79E;
     margin: 40px 0px;
+    text-align: center;
 }
 
 .deck{
@@ -67,4 +68,26 @@ h1 {
 
   .card .front-face.open {
     transform: rotateY(-180deg);
+  }
+
+  @media (max-width: 1110px) {
+    .deck{
+      width: 70%;
+    }
+    h1{
+      margin: 10px;
+    }
+  }
+
+
+  @media (max-width: 614px) {
+    main h1{
+      font-size: 36px;
+    }
+    .deck{
+      width: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
