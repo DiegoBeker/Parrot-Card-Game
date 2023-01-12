@@ -51,7 +51,6 @@ function select(card) {
         card.querySelector('.front-face').classList.add('open');
         card.querySelector('.back-face').classList.add('open');
         moves++;
-        console.log(moves);
         if (move.length === 2) {
             const img0 = move[0].querySelector('.back-face img').getAttribute('src');
             const img1 = move[1].querySelector('.back-face img').getAttribute('src');
