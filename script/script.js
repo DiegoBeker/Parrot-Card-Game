@@ -3,19 +3,19 @@ let gifs = ['bobrossparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 're
 let cards = prompt('Numero de cartas par Min = 4 Max = 14');
 let deck = [];
 let move = [];
-let moves = 0 ;
+let moves = 0;
 
 cardsNumber();
 buildDeck();
 insertDeckOnHtml();
 
 function cardsNumber() {
-    if(cards % 2 !== 0 || cards < 4 || cards > 14)
+    if (cards % 2 !== 0 || cards < 4 || cards > 14)
         alert('Número inválido');
     while (cards % 2 !== 0 || cards < 4 || cards > 14) {
         cards = prompt('Numero de cartas par Min = 4 Max = 14');
-        if(cards % 2 !== 0 || cards < 4 || cards > 14)
-        alert('Número inválido');
+        if (cards % 2 !== 0 || cards < 4 || cards > 14)
+            alert('Número inválido');
     }
 }
 function buildDeck() {
@@ -45,35 +45,37 @@ function comparator() {
     return Math.random() - 0.5;
 }
 
-function select(card){
-    move.push(card);
-    card.querySelector('.front-face').classList.add('open');
-    card.querySelector('.back-face').classList.add('open');
-    moves++;
-    console.log(moves);
-    if(move.length===2){
-        const img0 = move[0].querySelector('.back-face img').getAttribute('src');
-        const img1 = move[1].querySelector('.back-face img').getAttribute('src');
-        if(img0==img1){
-            console.log('iguais');
-            move[0].classList.add('found');
-            move[1].classList.add('found');
-            
-            move = [];
-        }else{
-            setTimeout(() => {
-                move[0].querySelector('.front-face').classList.remove('open');
-                move[0].querySelector('.back-face').classList.remove('open');
-                move[1].querySelector('.front-face').classList.remove('open');
-                move[1].querySelector('.back-face').classList.remove('open');
+function select(card) {
+    if (!card.classList.contains('found')) {
+        move.push(card);
+        card.querySelector('.front-face').classList.add('open');
+        card.querySelector('.back-face').classList.add('open');
+        moves++;
+        console.log(moves);
+        if (move.length === 2) {
+            const img0 = move[0].querySelector('.back-face img').getAttribute('src');
+            const img1 = move[1].querySelector('.back-face img').getAttribute('src');
+            if (img0 == img1) {
+                console.log('iguais');
+                move[0].classList.add('found');
+                move[1].classList.add('found');
+
                 move = [];
-            },1000);   
+            } else {
+                setTimeout(() => {
+                    move[0].querySelector('.front-face').classList.remove('open');
+                    move[0].querySelector('.back-face').classList.remove('open');
+                    move[1].querySelector('.front-face').classList.remove('open');
+                    move[1].querySelector('.back-face').classList.remove('open');
+                    move = [];
+                }, 1000);
+            }
+            endGameCheck();
         }
-        endGameCheck();
-    } 
+    }
 }
 
-function endGameCheck(){
-    if(document.querySelectorAll('.found').length === Number(cards))
-        alert(`Você ganhou em ${moves} jogadas!`),1000;
+function endGameCheck() {
+    if (document.querySelectorAll('.found').length === Number(cards))
+        alert(`Você ganhou em ${moves} jogadas!`), 1000;
 }
