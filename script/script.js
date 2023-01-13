@@ -45,21 +45,22 @@ function comparator() {
     return Math.random() - 0.5;
 }
 
+let checking = false;
 function select(card) {
-    if (!card.classList.contains('found')) {
+    if (!card.classList.contains('found')&&checking==false) {
         move.push(card);
         card.querySelector('.front-face').classList.add('open');
         card.querySelector('.back-face').classList.add('open');
         moves++;
         if (move.length === 2) {
+			checking = true;
             const img0 = move[0].querySelector('.back-face img').getAttribute('src');
             const img1 = move[1].querySelector('.back-face img').getAttribute('src');
             if (img0 == img1) {
-                console.log('iguais');
                 move[0].classList.add('found');
                 move[1].classList.add('found');
-
                 move = [];
+				checking = false;
             } else {
                 setTimeout(() => {
                     move[0].querySelector('.front-face').classList.remove('open');
@@ -68,6 +69,7 @@ function select(card) {
                     move[1].querySelector('.back-face').classList.remove('open');
                     move = [];
                 }, 1000);
+                setTimeout(()=>{checking = false;},1000);	
             }
             endGameCheck();
         }
@@ -76,5 +78,5 @@ function select(card) {
 
 function endGameCheck() {
     if (document.querySelectorAll('.found').length === Number(cards))
-        alert(`Você ganhou em ${moves} jogadas!`), 1000;
+        setTimeout(alert, 1000, `Você ganhou em ${moves} jogadas!`);
 }
