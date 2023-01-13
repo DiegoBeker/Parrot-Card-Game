@@ -12,12 +12,11 @@ insertDeckOnHtml();
 let clock = setInterval(incrementTime, 1000);
 
 function cardsNumber() {
-    const condition = cards % 2 !== 0 || cards < 4 || cards > 14;
-    if (condition)
+    if (cards % 2 !== 0 || cards < 4 || cards > 14)
         alert('Número inválido');
-    while (condition) {
+    while (cards % 2 !== 0 || cards < 4 || cards > 14) {
         cards = prompt('Numero de cartas **PAR** (Min = 4 Max = 14)');
-        if (condition)
+        if (cards % 2 !== 0 || cards < 4 || cards > 14)
             alert('Número inválido');
     }
 }
