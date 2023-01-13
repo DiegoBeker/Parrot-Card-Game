@@ -13,6 +13,23 @@ main {
     align-items: center;
 }
 
+.topo{
+  position: relative;
+  width: 100%;
+}
+
+.clock{
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  top:0px;
+  right: 10px;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: -0.004em;
+  color: #86BD8D;
+}
+
 h1 {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
@@ -74,20 +91,21 @@ h1 {
     .deck{
       width: 70%;
     }
-    h1{
-      margin: 10px;
-    }
   }
 
 
-  @media (max-width: 614px) {
+  @media (max-width: 414px) {
     main h1{
       font-size: 36px;
+      line-height: 40px;
     }
     .deck{
       width: 100%;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+    }
+    .clock{
+      font-size: 24px;
     }
   }

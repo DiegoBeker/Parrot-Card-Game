@@ -1,20 +1,22 @@
 const list = document.querySelector('.deck');
 const gifs = ['bobrossparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 'revertitparrot', 'tripletsparrot', 'unicornparrot'];
-let cards = prompt('Numero de cartas par Min = 4 Max = 14');
+let cards = prompt('Numero de cartas **PAR** (Min = 4 Max = 14)');
 let deck = [];
 let move = [];
 let moves = 0;
+let time = 0;
 
 cardsNumber();
 buildDeck();
 insertDeckOnHtml();
+let clock = setInterval(incrementTime, 1000);
 
 function cardsNumber() {
     const condition = cards % 2 !== 0 || cards < 4 || cards > 14;
     if (condition)
         alert('Número inválido');
     while (condition) {
-        cards = prompt('Numero de cartas par Min = 4 Max = 14');
+        cards = prompt('Numero de cartas **PAR** (Min = 4 Max = 14)');
         if (condition)
             alert('Número inválido');
     }
@@ -79,19 +81,22 @@ function select(card) {
 
 function endGameCheck() {
     if (document.querySelectorAll('.found').length === Number(cards)) {
-        alert(`Você ganhou em ${moves} jogadas! A duração do jogo foi de Y segundos!`);
-        let restart = prompt('Deseja reiniciar a partida("sim" ou "não"');
+        clearInterval(clock);
+        alert(`Você ganhou em ${moves} jogadas! A duração do jogo foi de ${time} segundos!`);
+        let restart = prompt('Deseja reiniciar a partida ("sim" ou "não"');
         while (restart !== 'não') {
             if (restart === 'sim') {
                 resetGame();
                 cardsNumber();
                 buildDeck();
                 insertDeckOnHtml();
+                clock = setInterval(incrementTime, 1000);
                 break;
             } else {
-                restart = prompt('Deseja reiniciar a partida("sim" ou "não"');
+                restart = prompt('Deseja reiniciar a partida ("sim" ou "não"');
             }
         }
+        
     }
 }
 
@@ -99,6 +104,13 @@ function resetGame() {
     deck = [];
     move = [];
     moves = 0;
+    time = 0;
+    document.querySelector('.clock').innerHTML = time;
     list.innerHTML = "";
     cards = prompt('Numero de cartas par Min = 4 Max = 14');
+}
+
+function incrementTime(){
+    document.querySelector('.clock').innerHTML = time;
+    time++;
 }
