@@ -36,8 +36,8 @@ function insertDeckOnHtml() {
                             <div class="front-face face">
                                 <img data-test="face-down-image" src="./images/back.png" alt="Parrot">
                             </div>
-                            <div data-test="face-up-image" class="back-face face">
-                                <img src="./images/${deck[i]}.gif" alt="${deck[i]}">
+                            <div class="back-face face">
+                                <img data-test="face-up-image" src="./images/${deck[i]}.gif" alt="${deck[i]}">
                             </div>
                         </div>`;
     }
