@@ -1,5 +1,5 @@
 const list = document.querySelector('.deck');
-const gifs = ['bobrossparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 'revertitparrot', 'tripletsparrot', 'unicornparrot'];
+const gifs = ['unicornparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 'revertitparrot', 'tripletsparrot', 'bobrossparrot'];
 let cards = prompt('Numero de cartas **PAR** (Min = 4 Max = 14)');
 let deck = [];
 let move = [];
@@ -32,11 +32,11 @@ function buildDeck() {
 
 function insertDeckOnHtml() {
     for (let i = 0; i < deck.length; i++) {
-        list.innerHTML += `<div class="card" onclick="select(this)">
+        list.innerHTML += `<div data-test="card" class="card" onclick="select(this)">
                             <div class="front-face face">
-                                <img src="./images/back.png" alt="Parrot">
+                                <img data-test="face-down-image" src="./images/back.png" alt="Parrot">
                             </div>
-                            <div class="back-face face">
+                            <div data-test="face-up-image" class="back-face face">
                                 <img src="./images/${deck[i]}.gif" alt="${deck[i]}">
                             </div>
                         </div>`;
@@ -95,7 +95,6 @@ function endGameCheck() {
                 restart = prompt('Deseja reiniciar a partida ("sim" ou "não"');
             }
         }
-        
     }
 }
 
@@ -110,6 +109,6 @@ function resetGame() {
 }
 
 function incrementTime(){
-    document.querySelector('.clock').innerHTML = time;
     time++;
+    document.querySelector('.clock').innerHTML = time;
 }
