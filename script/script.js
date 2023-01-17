@@ -1,5 +1,5 @@
 const list = document.querySelector('.deck');
-const gifs = ['unicornparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 'revertitparrot', 'tripletsparrot', 'bobrossparrot'];
+let gifs = ['unicornparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 'revertitparrot', 'tripletsparrot', 'bobrossparrot'];
 let cards = prompt('Numero de cartas **PAR** (Min = 4 Max = 14)');
 let deck = [];
 let move = [];
@@ -21,6 +21,7 @@ function cardsNumber() {
     }
 }
 function buildDeck() {
+    gifs.sort(comparator);
     for (let i = 0; i < cards / 2; i++) {
         deck.push(gifs[i]);
         deck.push(gifs[i]);
@@ -79,10 +80,11 @@ function select(card) {
 }
 
 function endGameCheck() {
+    let restart;
     if (document.querySelectorAll('.found').length === Number(cards)) {
         clearInterval(clock);
         alert(`Você ganhou em ${moves} jogadas! A duração do jogo foi de ${time} segundos!`);
-        let restart = prompt('Deseja reiniciar a partida ("sim" ou "não"');
+        restart = prompt('Deseja reiniciar a partida ("sim" ou "não"');
         while (restart !== 'não') {
             if (restart === 'sim') {
                 resetGame();
@@ -108,7 +110,7 @@ function resetGame() {
     cards = prompt('Numero de cartas par Min = 4 Max = 14');
 }
 
-function incrementTime(){
+function incrementTime() {
     time++;
     document.querySelector('.clock').innerHTML = time;
 }
